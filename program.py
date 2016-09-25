@@ -1,4 +1,6 @@
 import os
+import csv
+import io
 
 def main():
     print_header()
@@ -7,31 +9,31 @@ def main():
     query_data(data)
     print(data)
 
-
 def print_header():
     print('---------------------------') 
     print('REAL ESTATE DATA MINING APP') 
     print('---------------------------')
-    print()
+    print('')
 
 def get_data_file():
     base_folder = os.path.dirname(__file__)
-    os.path.join(base_folder,'data','file.csv')
+    return os.path.join(base_folder,'data','file.csv')
 
 def load_file(filename):
-    with open(filename,'r',encoding='utf-8') as fin:
-        header = fin.readline()
+    with io.open(filename, 'r', encoding='utf-8') as fin:
+        header = fin.readline().strip()
         print('header found'+ header)
 
 
         lines = []
         for line in fin:
-            line_data = line.split('.')
+            line_data = line.strip().split('.')
+            bed_count = line_data[4]
             lines.append(line_data)
         print(lines[:5])
 
 def query_data(data):
-    return []
+    pass
 
 
 if __name__ == '__main__':
